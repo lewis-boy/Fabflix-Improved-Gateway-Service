@@ -56,13 +56,13 @@ public class ConnectionPoolManager
      * Once you request a connection it is up to you to give it back
      * to the connection pool
      */
-    public synchronized Connection requestCon()
+    public Connection requestCon()
     {
         // TODO request connections from hikariConPool
         return null;
     }
 
-    public synchronized void releaseCon(Connection con)
+    public void releaseCon(Connection con)
     {
         // TODO release connections back to hikariConPool
     }
