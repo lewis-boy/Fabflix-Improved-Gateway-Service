@@ -29,6 +29,7 @@ public class BillingConfigs {
     private String cartClearPath;
     private String orderPlacePath;
     private String orderRetrievePath;
+    private String orderCompletePath;
 
     public BillingConfigs() {
     }
@@ -122,6 +123,13 @@ public class BillingConfigs {
             } else {
                 System.err.println("Billing Order Retrieve Path: " + orderRetrievePath);
             }
+
+            orderCompletePath = cm.getBillingEndpoints().get("orderComplete");
+            if (orderCompletePath == null) {
+                System.err.println("Billing Order Complete Path not found in configuration file.");
+            } else {
+                System.err.println("Billing Order Complete Path: " + orderCompletePath);
+            }
         }
     }
 
@@ -137,7 +145,8 @@ public class BillingConfigs {
                                     "\t" + cartRetrievePath + "\n" +
                                     "\t" + cartClearPath + "\n" +
                                     "\t" + orderPlacePath + "\n" +
-                                    "\t" + orderRetrievePath);
+                                    "\t" + orderRetrievePath +"\n" +
+                                    "\t" + orderCompletePath);
     }
 
     public String getScheme() {
@@ -182,5 +191,9 @@ public class BillingConfigs {
 
     public String getOrderRetrievePath() {
         return orderRetrievePath;
+    }
+
+    public String getOrderCompletePath() {
+        return orderCompletePath;
     }
 }

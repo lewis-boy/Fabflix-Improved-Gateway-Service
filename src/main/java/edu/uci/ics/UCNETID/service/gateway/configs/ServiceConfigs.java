@@ -13,7 +13,7 @@ public class ServiceConfigs {
     private final String DEFAULT_SCHEME = "http://";
     private final String DEFAULT_HOSTNAME = "0.0.0.0";
     private final int DEFAULT_PORT = 6243;
-    private final String DEFAULT_PATH = "/api/movies";
+    private final String DEFAULT_PATH = "/api/g";
     // Default logger configs
     private final String DEFAULT_OUTPUTDIR = "./logs/";
     private final String DEFAULT_OUTPUTFILE = "test.log";
