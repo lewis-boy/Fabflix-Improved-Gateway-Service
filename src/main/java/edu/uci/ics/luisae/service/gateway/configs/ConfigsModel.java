@@ -1,4 +1,4 @@
-package edu.uci.ics.UCNETID.service.gateway.configs;
+package edu.uci.ics.luisae.service.gateway.configs;
 
 import java.util.Map;
 

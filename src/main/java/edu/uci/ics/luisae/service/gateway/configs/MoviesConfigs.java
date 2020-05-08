@@ -1,6 +1,6 @@
-package edu.uci.ics.UCNETID.service.gateway.configs;
+package edu.uci.ics.luisae.service.gateway.configs;
 
-import edu.uci.ics.UCNETID.service.gateway.logger.ServiceLogger;
+import edu.uci.ics.luisae.service.gateway.logger.ServiceLogger;
 
 public class MoviesConfigs {
 
@@ -29,6 +29,7 @@ public class MoviesConfigs {
     private String peoplePath;
     private String peopleSearchPath;
     private String peopleGetPath;
+    private String randomPath;
 
     public MoviesConfigs() {
     }
@@ -122,6 +123,13 @@ public class MoviesConfigs {
             } else {
                 System.err.println("Movies People Get Path: " + peopleGetPath);
             }
+
+            randomPath = cm.getMoviesEndpoints().get("random");
+            if (randomPath == null) {
+                System.err.println("Random Movie Path not found in configuration file. Using default.");
+            } else {
+                System.err.println("Random Movie Path: " + randomPath);
+            }
         }
     }
 
@@ -137,7 +145,8 @@ public class MoviesConfigs {
                 "\t" + thumbnailPath + "\n" +
                 "\t" + peoplePath + "\n" +
                 "\t" + peopleSearchPath + "\n" +
-                "\t" + peopleGetPath);
+                "\t" + peopleGetPath + "\n" +
+                "\t" + randomPath);
     }
 
     public String getScheme() {
@@ -182,5 +191,9 @@ public class MoviesConfigs {
 
     public String getPeopleGetPath() {
         return peopleGetPath;
+    }
+
+    public String getRandomPath() {
+        return randomPath;
     }
 }

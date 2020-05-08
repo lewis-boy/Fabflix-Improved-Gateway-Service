@@ -1,4 +1,6 @@
-package edu.uci.ics.UCNETID.service.gateway.threadpool;
+package edu.uci.ics.luisae.service.gateway.threadpool;
+
+import edu.uci.ics.luisae.service.gateway.logger.ServiceLogger;
 
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
@@ -28,6 +30,10 @@ public class ThreadPool
         queue = new LinkedBlockingQueue<>();
 
         // TODO more work is needed to create the threads
+        for(int i = 0; i < this.numWorkers; i++){
+            workers.add(Worker.CreateWorker(i, this));
+            workers.get(i).start();
+        }
     }
 
     public static ThreadPool createThreadPool(int numWorkers)
@@ -46,12 +52,27 @@ public class ThreadPool
     ClientRequest takeRequest()
     {
         // TODO *take* the request from the queue
-        return null;
+        try{
+            return this.queue.take();
+        }
+        catch(InterruptedException e){
+            ServiceLogger.LOGGER.warning("TAKE: Interrupted while waiting ");
+            ServiceLogger.LOGGER.warning(e.getMessage());
+            ServiceLogger.LOGGER.warning(e.getLocalizedMessage());
+            return null;
+        }
     }
 
-    public void putRequest()
+    public void putRequest(ClientRequest request)
     {
         // TODO *put* the request into the queue
+        try{
+            this.queue.put(request);
+        }catch(InterruptedException e){
+            ServiceLogger.LOGGER.warning("TAKE: Interrupted while waiting ");
+            ServiceLogger.LOGGER.warning(e.getMessage());
+            ServiceLogger.LOGGER.warning(e.getLocalizedMessage());
+        }
     }
 
 }

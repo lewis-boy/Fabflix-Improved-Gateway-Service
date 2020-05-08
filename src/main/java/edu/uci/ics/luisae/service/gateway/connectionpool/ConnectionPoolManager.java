@@ -1,10 +1,12 @@
-package edu.uci.ics.UCNETID.service.gateway.connectionpool;
+package edu.uci.ics.luisae.service.gateway.connectionpool;
 
 import com.zaxxer.hikari.HikariConfig;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import com.zaxxer.hikari.HikariDataSource;
+import edu.uci.ics.luisae.service.gateway.logger.ServiceLogger;
 
 public class ConnectionPoolManager
 {
@@ -59,11 +61,19 @@ public class ConnectionPoolManager
     public Connection requestCon()
     {
         // TODO request connections from hikariConPool
-        return null;
+        try{
+            Connection connection = hikariConPool.getConnection();
+            return connection;
+        }
+        catch(SQLException e){
+            ServiceLogger.LOGGER.severe(e.getMessage());
+            return null;
+        }
     }
 
     public void releaseCon(Connection con)
     {
         // TODO release connections back to hikariConPool
+        hikariConPool.evictConnection(con);
     }
 }
